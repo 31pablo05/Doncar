@@ -1,35 +1,47 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+"use client";
 
-function App() {
-  const [count, setCount] = useState(0)
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import HomePage from "./pages/HomePage";
+import { useState } from "react";
+
+export default function App() {
+  const [cartOpen, setCartOpen] = useState(false);
+  const [cartItems, setCartItems] = useState([
+    { id: 1, name: "Burger Deluxe", price: 12.99, quantity: 2 },
+    { id: 2, name: "Pizza Supreme", price: 15.5, quantity: 1 },
+  ]);
+
+  // Función para actualizar la cantidad de un producto
+  const updateQuantity = (id, newQuantity) => {
+    if (newQuantity <= 0) {
+      removeItem(id);
+      return;
+    }
+    setCartItems(prev => 
+      prev.map(item => 
+        item.id === id ? { ...item, quantity: newQuantity } : item
+      )
+    );
+  };
+
+  // Función para eliminar un producto del carrito
+  const removeItem = (id) => {
+    setCartItems(prev => prev.filter(item => item.id !== id));
+  };
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <Navbar cartItems={cartItems} setCartOpen={setCartOpen} />
+      <HomePage 
+        cartOpen={cartOpen} 
+        setCartOpen={setCartOpen} 
+        cartItems={cartItems} 
+        setCartItems={setCartItems}
+        updateQuantity={updateQuantity}
+        removeItem={removeItem}
+      />
+      <Footer />
     </>
-  )
+  );
 }
-
-export default App

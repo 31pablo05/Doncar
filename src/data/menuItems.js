@@ -1,0 +1,68 @@
+const menuItems = [
+  {
+    id: 1,
+    name: "Burger Deluxe",
+    price: 12.99,
+    category: "Comidas",
+    type: "Hamburguesas",
+    image: "/placeholder.svg?height=300&width=400&text=400x300px",
+  },
+  {
+    id: 2,
+    name: "Pizza Supreme",
+    price: 15.5,
+    category: "Comidas",
+    type: "Pizzas",
+    image: "/placeholder.svg?height=300&width=400&text=400x300px",
+  },
+  {
+    id: 3,
+    name: "Papas Fritas",
+    price: 4.5,
+    category: "Acompañamientos",
+    type: "Fritas",
+    image: "/placeholder.svg?height=300&width=400&text=400x300px",
+  },
+  {
+    id: 4,
+    name: "Aros de Cebolla",
+    price: 5.0,
+    category: "Acompañamientos",
+    type: "Aros",
+    image: "/placeholder.svg?height=300&width=400&text=400x300px",
+  },
+  {
+    id: 5,
+    name: "Refresco Cola",
+    price: 3.0,
+    category: "Bebidas",
+    type: "Gaseosa",
+    image: "/placeholder.svg?height=300&width=400&text=400x300px",
+  },
+  {
+    id: 6,
+    name: "Agua Mineral",
+    price: 2.5,
+    category: "Bebidas",
+    type: "Agua",
+    image: "/placeholder.svg?height=300&width=400&text=400x300px",
+  },
+  {
+    id: 7,
+    name: "Helado Artesanal",
+    price: 6.0,
+    category: "Postres",
+    type: "Helado",
+    image: "/placeholder.svg?height=300&width=400&text=400x300px",
+  },
+  {
+    id: 8,
+    name: "Tarta de Chocolate",
+    price: 7.5,
+    category: "Postres",
+    type: "Tarta",
+    image: "/placeholder.svg?height=300&width=400&text=400x300px",
+  },
+];
+
+export default menuItems;
