@@ -1,0 +1,27 @@
+User-agent: *
+Allow: /
+
+# Optimizado para Café Doncar Trelew
+# Hamburguesas y Pizzas Caseras
+
+# Permitir acceso completo a Google
+User-agent: Googlebot
+Allow: /
+
+# Permitir acceso a Bing
+User-agent: Bingbot
+Allow: /
+
+# Bloquear archivos innecesarios
+Disallow: /src/
+Disallow: /node_modules/
+Disallow: /*.map$
+Disallow: /vite.config.js
+Disallow: /package.json
+
+# Sitemap
+Sitemap: https://cafedoncar.com/sitemap.xml
+
+# Crawl-delay para bots pesados
+User-agent: *
+Crawl-delay: 1

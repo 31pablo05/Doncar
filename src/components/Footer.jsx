@@ -1,6 +1,6 @@
 "use client";
 
-import { MapPin, Phone, Mail, Clock, Facebook, Instagram, Twitter, Heart, Star, ChefHat } from "lucide-react";
+import { MapPin, Phone, Mail, Clock, Facebook, Instagram, Heart, Star, ChefHat } from "lucide-react";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -26,7 +26,7 @@ export default function Footer() {
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         
         {/* Sección Principal del Footer */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           
           {/* Columna 1: Información del Restaurante */}
           <div className="space-y-6">
@@ -49,8 +49,7 @@ export default function Footer() {
             <div className="flex space-x-4">
               {[
                 { icon: Facebook, href: "#" },
-                { icon: Instagram, href: "#" },
-                { icon: Twitter, href: "#" }
+                { icon: Instagram, href: "https://www.instagram.com/cafedoncar/" }
               ].map((social, index) => (
                 <a
                   key={index}
@@ -69,7 +68,7 @@ export default function Footer() {
               Enlaces Rápidos
             </h4>
             <nav className="space-y-3">
-              {['Inicio', 'Menú', 'Nosotros', 'Reservas', 'Contacto', 'Delivery'].map((link) => (
+              {['Inicio', 'Menú', 'Nosotros', 'Contacto', 'Delivery'].map((link) => (
                 <a
                   key={link}
                   href="#"
@@ -91,7 +90,7 @@ export default function Footer() {
             </h4>
             <div className="space-y-4">
               {[
-                { icon: MapPin, text: "Pellegrini 1624, Trelew, Chubut", link: null },
+                { icon: MapPin, text: "Pellegrini 1624, Trelew, Chubut", link: "https://maps.google.com/?q=Pellegrini+1624,+Trelew,+Chubut" },
                 { icon: Phone, text: "280 4518716", link: "tel:2804518716" },
                 { icon: Instagram, text: "@cafedoncar", link: "https://www.instagram.com/cafedoncar/" },
                 { icon: Clock, text: "Lun-Dom: 11:00 - 23:00", link: null }
@@ -114,6 +113,49 @@ export default function Footer() {
                   )}
                 </div>
               ))}
+            </div>
+          </div>
+
+          {/* Columna 4: Mapa de Ubicación */}
+          <div className="space-y-6 md:col-span-2 lg:col-span-1">
+            <h4 className="text-lg font-bold text-white border-l-4 border-red-400 pl-4">
+              📍 Encuéntranos
+            </h4>
+            <div className="relative group">
+              <div className="overflow-hidden rounded-xl border-2 border-red-400/30 group-hover:border-red-400/50 transition-all duration-300 shadow-lg hover:shadow-red-400/20">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2965.2487!2d-65.3051!3d-43.2489!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDPCsDE0JzU2LjAiUyA2NcKwMTgnMTguNCJX!5e0!3m2!1ses!2sar!4v1000000000000!5m2!1ses!2sar&q=Pellegrini+1624,+Trelew,+Chubut"
+                  width="100%"
+                  height="250"
+                  style={{ border: 0 }}
+                  allowFullScreen=""
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="Ubicación Café Doncar - Pellegrini 1624, Trelew, Chubut"
+                  className="grayscale hover:grayscale-0 transition-all duration-500"
+                />
+              </div>
+              
+              {/* Overlay con información */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl pointer-events-none">
+                <div className="absolute bottom-3 left-3 right-3">
+                  <p className="text-white text-sm font-semibold">📍 Pellegrini 1624</p>
+                  <p className="text-gray-200 text-xs">Trelew, Chubut</p>
+                </div>
+              </div>
+              
+              {/* Botón para abrir en Google Maps */}
+              <div className="mt-3">
+                <a
+                  href="https://maps.google.com/?q=Pellegrini+1624,+Trelew,+Chubut"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center space-x-2 text-sm text-red-400 hover:text-red-300 transition-colors duration-300 group/link"
+                >
+                  <MapPin className="h-4 w-4 group-hover/link:scale-110 transition-transform duration-300" />
+                  <span>Abrir en Google Maps</span>
+                </a>
+              </div>
             </div>
           </div>
         </div>

@@ -1,13 +1,122 @@
 <!doctype html>
-<html lang="en">
+<html lang="es-AR" itemscope itemtype="http://schema.org/Restaurant">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    
+    <!-- SEO Básico -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React</title>
+    <title>Café Doncar Trelew - Hamburguesas y Pizzas 100% Caseras | Delivery Gratis</title>
+    <meta name="description" content="🍕🍔 Café Doncar en Trelew, Chubut. Las mejores hamburguesas y pizzas 100% caseras desde 2020. Delivery gratis, recetas propias. Pellegrini 1624. ¡Pedí ya por WhatsApp!" />
+    
+    <!-- Keywords para SEO Local -->
+    <meta name="keywords" content="hamburguesas Trelew, pizzas Trelew, delivery Trelew, comida casera Chubut, restaurant Trelew, cafe Doncar, hamburguesas artesanales, pizzas caseras, delivery gratis Trelew, comida rápida Trelew, Pellegrini 1624, WhatsApp pedidos, hamburguesas gourmet, pizzas artesanales, comida Patagonia" />
+    
+    <!-- Meta tags para redes sociales - Open Graph -->
+    <meta property="og:type" content="restaurant" />
+    <meta property="og:title" content="Café Doncar - Hamburguesas y Pizzas Caseras en Trelew" />
+    <meta property="og:description" content="🍕🍔 Las mejores hamburguesas y pizzas 100% caseras de Trelew. Delivery gratis. Desde 2020 conquistando paladares con recetas propias." />
+    <meta property="og:image" content="/assets/images/logo.doncar.PNG" />
+    <meta property="og:url" content="https://cafedoncar.com" />
+    <meta property="og:site_name" content="Café Doncar Trelew" />
+    <meta property="og:locale" content="es_AR" />
+    
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Café Doncar - Hamburguesas y Pizzas Caseras en Trelew" />
+    <meta name="twitter:description" content="🍕🍔 Las mejores hamburguesas y pizzas 100% caseras de Trelew. Delivery gratis desde Pellegrini 1624." />
+    <meta name="twitter:image" content="/assets/images/logo.doncar.PNG" />
+    
+    <!-- Datos estructurados JSON-LD para Google -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Restaurant",
+      "name": "Café Doncar",
+      "description": "Restaurante especializado en hamburguesas y pizzas 100% caseras en Trelew, Chubut. Delivery gratis y recetas propias desde 2020.",
+      "image": "/assets/images/logo.doncar.PNG",
+      "url": "https://cafedoncar.com",
+      "telephone": "+54-280-4518716",
+      "priceRange": "$$",
+      "servesCuisine": ["Hamburguesas", "Pizzas", "Comida Rápida", "Comida Casera"],
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Pellegrini 1624",
+        "addressLocality": "Trelew",
+        "addressRegion": "Chubut",
+        "addressCountry": "AR"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": -43.2489,
+        "longitude": -65.3051
+      },
+      "openingHours": [
+        "Mo-Su 18:00-24:00"
+      ],
+      "hasMenu": "https://cafedoncar.com/#menu",
+      "acceptsReservations": false,
+      "takeaway": true,
+      "delivery": true,
+      "paymentAccepted": ["Cash", "Credit Card"],
+      "currenciesAccepted": "ARS",
+      "foundingDate": "2020-09-29",
+      "slogan": "Hamburguesas y Pizzas 100% Caseras",
+      "areaServed": {
+        "@type": "City",
+        "name": "Trelew, Chubut, Argentina"
+      }
+    }
+    </script>
+    
+    <!-- Favicon optimizado -->
+    <link rel="icon" type="image/png" href="/assets/images/logo.doncar.PNG" />
+    <link rel="apple-touch-icon" href="/assets/images/logo.doncar.PNG" />
+    <link rel="manifest" href="/manifest.json" />
+    
+    <!-- Meta tags adicionales para SEO -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="googlebot" content="index, follow" />
+    <meta name="author" content="Café Doncar Trelew" />
+    <meta name="publisher" content="Café Doncar" />
+    <meta name="copyright" content="© 2024 Café Doncar - Todos los derechos reservados" />
+    
+    <!-- Geo tags para SEO local -->
+    <meta name="geo.region" content="AR-U" />
+    <meta name="geo.placename" content="Trelew, Chubut" />
+    <meta name="geo.position" content="-43.2489;-65.3051" />
+    <meta name="ICBM" content="-43.2489, -65.3051" />
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://cafedoncar.com" />
+    
+    <!-- Preconnect para mejorar velocidad -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    
+    <!-- Meta tags para móviles -->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="theme-color" content="#dc2626" />
+    
+    <!-- DNS Prefetch para mejor rendimiento -->
+    <link rel="dns-prefetch" href="//wa.me" />
+    <link rel="dns-prefetch" href="//api.whatsapp.com" />
+    
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
+    
+    <!-- Google Analytics / Search Console - Agrega aquí tu código cuando tengas las cuentas -->
+    <!-- 
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'GA_MEASUREMENT_ID');
+    </script>
+    -->
   </body>
 </html>

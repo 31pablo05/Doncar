@@ -127,6 +127,56 @@ export default function HomePage({ addToCart }) {
           <div className="mb-8 animate-fadeInUp delay-400">
             <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
           </div>
+
+          {/* Instrucciones de pedido */}
+          <div className="mb-8 animate-fadeInUp delay-450">
+            <div className="bg-gradient-to-r from-red-600/20 to-orange-500/20 backdrop-blur-sm border border-red-400/30 rounded-2xl p-6 shadow-lg">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-8 h-8 bg-red-500 rounded-full flex items-center justify-center">
+                  <span className="text-white font-bold text-sm">?</span>
+                </div>
+                <h4 className="text-white font-bold text-lg">¿Cómo hacer tu pedido?</h4>
+              </div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                <div className="flex items-start gap-3">
+                  <div className="w-6 h-6 bg-red-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <span className="text-white font-bold text-xs">1</span>
+                  </div>
+                  <div>
+                    <p className="text-red-300 font-semibold">Elegí tus favoritos</p>
+                    <p className="text-gray-300">Navegá por nuestro menú y agregá los productos que más te gusten al carrito</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-start gap-3">
+                  <div className="w-6 h-6 bg-red-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <span className="text-white font-bold text-xs">2</span>
+                  </div>
+                  <div>
+                    <p className="text-red-300 font-semibold">Revisá tu pedido</p>
+                    <p className="text-gray-300">Verificá las cantidades y el total en tu carrito de compras</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-start gap-3">
+                  <div className="w-6 h-6 bg-red-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <span className="text-white font-bold text-xs">3</span>
+                  </div>
+                  <div>
+                    <p className="text-red-300 font-semibold">Enviá por WhatsApp</p>
+                    <p className="text-gray-300">Al finalizar, se abrirá WhatsApp con tu pedido ya armado listo para enviar</p>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="mt-4 pt-4 border-t border-red-400/20">
+                <p className="text-center text-gray-400 text-xs">
+                  💡 <span className="text-red-300">Tip:</span> Usá el buscador arriba o las categorías laterales para encontrar rápido lo que buscás
+                </p>
+              </div>
+            </div>
+          </div>
           
           <div className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-8 animate-fadeInUp delay-500">
             <CategorySidebar categories={categories} selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} />

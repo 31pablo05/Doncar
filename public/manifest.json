@@ -1,0 +1,53 @@
+{
+  "name": "Café Doncar - Hamburguesas y Pizzas Caseras Trelew",
+  "short_name": "Café Doncar",
+  "description": "🍕🍔 Las mejores hamburguesas y pizzas 100% caseras de Trelew, Chubut. Delivery gratis desde Pellegrini 1624. ¡Pedí por WhatsApp!",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#dc2626",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "es-AR",
+  "categories": ["food", "restaurant", "delivery"],
+  "icons": [
+    {
+      "src": "/assets/images/logo.doncar.PNG",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/assets/images/logo.doncar.PNG",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Ver Menú",
+      "short_name": "Menú",
+      "description": "Ver nuestro menú de hamburguesas y pizzas",
+      "url": "/#menu",
+      "icons": [
+        {
+          "src": "/assets/images/logo.doncar.PNG",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Hacer Pedido",
+      "short_name": "Pedido",
+      "description": "Hacer pedido por WhatsApp",
+      "url": "https://wa.me/5492804518716",
+      "icons": [
+        {
+          "src": "/assets/images/logo.doncar.PNG",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ]
+}
