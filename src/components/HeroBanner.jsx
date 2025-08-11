@@ -1,11 +1,10 @@
 "use client"
 
 import { useState, useEffect } from "react";
-import { ChevronLeft, ChevronRight, Play, Star, ArrowRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, Star, ArrowRight } from "lucide-react";
 
 export default function HeroBanner() {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
 
   // Slides del carrusel con imágenes y video reales
   const slides = [
@@ -44,19 +43,18 @@ export default function HeroBanner() {
       subtitle: "Vive la magia de cada momento",
       description: "Descubre todo lo que tenemos preparado para ti",
       cta: "Ver Más"
-    }
+    },
+   
   ];
 
   // Auto-play del carrusel
   useEffect(() => {
-    if (!isAutoPlaying) return;
-    
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
     }, 6000); // Aumenté a 6 segundos para dar más tiempo al video
 
     return () => clearInterval(interval);
-  }, [isAutoPlaying, slides.length]);
+  }, [slides.length]);
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % slides.length);
@@ -87,10 +85,22 @@ export default function HeroBanner() {
               <video
                 src={slide.src}
                 className="w-full h-full object-cover object-center"
-                autoPlay
                 muted
                 loop
                 playsInline
+                onLoadedMetadata={(e) => {
+                  // Solo reproduce automáticamente si es el slide activo
+                  if (index === currentSlide) {
+                    e.target.play();
+                  }
+                }}
+                ref={(video) => {
+                  if (video && index === currentSlide) {
+                    video.play();
+                  } else if (video && index !== currentSlide) {
+                    video.pause();
+                  }
+                }}
               />
             ) : (
               <img
@@ -108,7 +118,7 @@ export default function HeroBanner() {
 
       {/* Elementos Decorativos Animados - Reducidos en móvil */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 left-4 sm:left-10 w-24 h-24 sm:w-32 sm:h-32 bg-yellow-400/20 sm:bg-yellow-400/30 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute top-20 left-4 sm:left-10 w-24 h-24 sm:w-32 sm:h-32 bg-gray-400/20 sm:bg-gray-400/30 rounded-full blur-3xl animate-pulse"></div>
         <div className="absolute bottom-20 right-4 sm:right-10 w-32 h-32 sm:w-40 sm:h-40 bg-orange-400/20 sm:bg-orange-400/30 rounded-full blur-3xl animate-pulse delay-1000"></div>
         <div className="absolute top-1/2 left-1/4 w-16 h-16 sm:w-24 sm:h-24 bg-red-400/20 sm:bg-red-400/30 rounded-full blur-2xl animate-pulse delay-500"></div>
         <div className="absolute bottom-1/3 left-1/2 w-24 h-24 sm:w-36 sm:h-36 bg-pink-400/10 sm:bg-pink-400/20 rounded-full blur-3xl animate-pulse delay-2000"></div>
@@ -117,7 +127,7 @@ export default function HeroBanner() {
         {[...Array(6)].map((_, i) => (
           <div
             key={i}
-            className={`hidden sm:block absolute w-2 h-2 bg-yellow-400/40 rounded-full animate-bounce`}
+            className={`hidden sm:block absolute w-2 h-2 bg-gray-400/40 rounded-full animate-bounce`}
             style={{
               left: `${20 + i * 15}%`,
               top: `${30 + (i % 2) * 40}%`,
@@ -135,9 +145,9 @@ export default function HeroBanner() {
           {/* Contenido Principal Centrado */}
           <div className="space-y-6 sm:space-y-8 text-center lg:text-left max-w-4xl mx-auto lg:mx-0">
             {/* Badge Superior */}
-            <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-yellow-400/20 to-orange-400/20 backdrop-blur-sm border border-yellow-400/30 rounded-full px-3 py-1.5 sm:px-4 sm:py-2">
-              <Star className="h-3 w-3 sm:h-4 sm:w-4 text-yellow-400 fill-current" />
-              <span className="text-yellow-300 font-semibold text-xs sm:text-sm">Calidad Premium</span>
+            <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-gray-400/20 to-gray-600/20 backdrop-blur-sm border border-gray-400/30 rounded-full px-3 py-1.5 sm:px-4 sm:py-2">
+              <Star className="h-3 w-3 sm:h-4 sm:w-4 text-gray-400 fill-current" />
+              <span className="text-gray-300 font-semibold text-xs sm:text-sm">Calidad Premium</span>
             </div>
 
             {/* Título Principal */}
@@ -146,12 +156,12 @@ export default function HeroBanner() {
                 <span className="text-white block animate-fadeInUp">
                   {slides[currentSlide].title.split(' ')[0]}
                 </span>
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-orange-400 to-red-400 block animate-fadeInUp delay-200">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-gray-400 via-gray-600 to-gray-800 block animate-fadeInUp delay-200">
                   {slides[currentSlide].title.split(' ').slice(1).join(' ')}
                 </span>
               </h1>
               
-              <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-yellow-300 font-bold animate-fadeInUp delay-300">
+              <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-gray-300 font-bold animate-fadeInUp delay-300">
                 {slides[currentSlide].subtitle}
               </h2>
             </div>
@@ -163,18 +173,9 @@ export default function HeroBanner() {
 
             {/* Botones de Acción */}
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start animate-fadeInUp delay-500 px-4 sm:px-0">
-              <button className="group bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-black px-6 py-3 sm:px-8 sm:py-4 rounded-2xl font-bold text-base sm:text-lg shadow-2xl hover:shadow-yellow-500/25 transition-all transform hover:scale-105 hover:-translate-y-1 duration-300 flex items-center justify-center space-x-2">
+              <button className="group bg-gradient-to-r from-gray-400 to-gray-600 hover:from-gray-500 hover:to-gray-700 text-white px-6 py-3 sm:px-8 sm:py-4 rounded-2xl font-bold text-base sm:text-lg shadow-2xl hover:shadow-gray-500/25 transition-all transform hover:scale-105 hover:-translate-y-1 duration-300 flex items-center justify-center space-x-2">
                 <span>{slides[currentSlide].cta}</span>
                 <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5 group-hover:translate-x-1 transition-transform duration-300" />
-              </button>
-              
-              <button 
-                onClick={() => setIsAutoPlaying(!isAutoPlaying)}
-                className="group bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 hover:border-yellow-400/30 text-white px-6 py-3 sm:px-8 sm:py-4 rounded-2xl font-bold text-base sm:text-lg transition-all duration-300 hover:scale-105 flex items-center justify-center space-x-2"
-              >
-                <Play className={`h-4 w-4 sm:h-5 sm:w-5 transition-transform duration-300 ${isAutoPlaying ? 'rotate-90' : ''}`} />
-                <span className="hidden sm:inline">{isAutoPlaying ? 'Pausar' : 'Reproducir'}</span>
-                <span className="sm:hidden">{isAutoPlaying ? 'Pausar' : 'Play'}</span>
               </button>
             </div>
 
@@ -186,7 +187,7 @@ export default function HeroBanner() {
                 { number: "4.9", label: "Rating Promedio" }
               ].map((stat, index) => (
                 <div key={index} className="text-center lg:text-left">
-                  <div className="text-xl sm:text-2xl md:text-3xl font-black text-yellow-400">
+                  <div className="text-xl sm:text-2xl md:text-3xl font-black text-gray-400">
                     {stat.number}
                   </div>
                   <div className="text-xs sm:text-sm text-white/70 font-medium">
@@ -206,7 +207,7 @@ export default function HeroBanner() {
           {/* Botón Anterior */}
           <button
             onClick={prevSlide}
-            className="p-1.5 sm:p-2 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 hover:border-yellow-400/30 transition-all duration-300 hover:scale-110"
+            className="p-1.5 sm:p-2 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 hover:border-gray-400/30 transition-all duration-300 hover:scale-110"
           >
             <ChevronLeft className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
           </button>
@@ -219,7 +220,7 @@ export default function HeroBanner() {
                 onClick={() => goToSlide(index)}
                 className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-all duration-300 ${
                   index === currentSlide
-                    ? 'bg-gradient-to-r from-yellow-400 to-orange-400 scale-125'
+                    ? 'bg-gradient-to-r from-gray-400 to-gray-600 scale-125'
                     : 'bg-white/30 hover:bg-white/50'
                 }`}
               />
@@ -229,7 +230,7 @@ export default function HeroBanner() {
           {/* Botón Siguiente */}
           <button
             onClick={nextSlide}
-            className="p-1.5 sm:p-2 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 hover:border-yellow-400/30 transition-all duration-300 hover:scale-110"
+            className="p-1.5 sm:p-2 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 hover:border-gray-400/30 transition-all duration-300 hover:scale-110"
           >
             <ChevronRight className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
           </button>
@@ -239,9 +240,9 @@ export default function HeroBanner() {
       {/* Indicador de Progreso */}
       <div className="absolute bottom-0 left-0 w-full h-0.5 sm:h-1 bg-black/20">
         <div 
-          className="h-full bg-gradient-to-r from-yellow-400 to-orange-400 transition-all duration-300 ease-linear"
+          className="h-full bg-gradient-to-r from-gray-400 to-gray-600 transition-all duration-300 ease-linear"
           style={{ 
-            width: isAutoPlaying ? `${((currentSlide + 1) / slides.length) * 100}%` : '0%'
+            width: `${((currentSlide + 1) / slides.length) * 100}%`
           }}
         />
       </div>

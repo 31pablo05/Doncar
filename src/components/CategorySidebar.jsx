@@ -2,8 +2,8 @@
 
 export default function CategorySidebar({ categories, selectedCategory, setSelectedCategory }) {
   return (
-    <div className="bg-gray-900/80 backdrop-blur-md rounded-2xl p-6 border border-gray-600 h-fit hover:bg-gray-900/90 transition-all duration-300 shadow-2xl animate-fadeInUp">
-      <h4 className="text-xl font-bold text-white mb-6 flex items-center animate-pulse">
+    <div className="bg-gray-900/80 backdrop-blur-md rounded-2xl p-4 sm:p-6 border border-gray-600 h-fit hover:bg-gray-900/90 transition-all duration-300 shadow-2xl animate-fadeInUp">
+      <h4 className="text-lg sm:text-xl font-bold text-white mb-4 sm:mb-6 flex items-center animate-pulse">
         <span className="w-1 h-6 bg-gradient-to-b from-gray-400 to-white rounded mr-3 animate-pulse shadow-lg"></span>
         Categorías
       </h4>
@@ -12,7 +12,7 @@ export default function CategorySidebar({ categories, selectedCategory, setSelec
           <button
             key={category}
             onClick={() => setSelectedCategory(category)}
-            className={`w-full text-left px-4 py-3 rounded-xl transition-all duration-300 hover:scale-105 transform ${
+            className={`w-full text-left px-3 sm:px-4 py-2 sm:py-3 rounded-xl transition-all duration-300 hover:scale-105 transform text-sm sm:text-base ${
               selectedCategory === category 
                 ? "bg-white/20 text-white font-bold shadow-2xl border border-gray-400 animate-pulse" 
                 : "text-gray-300 hover:bg-gray-800/50 hover:text-white hover:shadow-lg"

@@ -4,16 +4,15 @@ import HeroBanner from "../components/HeroBanner";
 import SearchBar from "../components/SearchBar";
 import CategorySidebar from "../components/CategorySidebar";
 import MenuList from "../components/MenuList";
-import CartSidebar from "../components/CartSidebar";
+import DeliveryBanner from "../components/DeliveryBanner";
+import AboutSection from "../components/AboutSection";
 import { useState, useMemo } from "react";
 import menuItems from "../data/menuItems";
 import categories from "../data/categories";
 
-export default function HomePage({ cartOpen, setCartOpen, cartItems, setCartItems, updateQuantity, removeItem }) {
+export default function HomePage({ addToCart }) {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("Todos");
-
-  const total = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
   const filteredItems = useMemo(() => {
     let items = menuItems;
@@ -31,23 +30,21 @@ export default function HomePage({ cartOpen, setCartOpen, cartItems, setCartItem
   }, [searchTerm, selectedCategory]);
 
   const handleAddToCart = (item) => {
-    setCartItems((prev) => {
-      const found = prev.find((i) => i.id === item.id);
-      if (found) {
-        return prev.map((i) =>
-          i.id === item.id ? { ...i, quantity: i.quantity + 1 } : i
-        );
-      }
-      return [...prev, { ...item, quantity: 1 }];
-    });
+    addToCart(item);
   };
 
   return (
     <div className="min-h-screen bg-gray-800">
-      <HeroBanner />
+      {/* Hero Section */}
+      <div id="hero">
+        <HeroBanner />
+      </div>
+      
+      {/* Banner de Delivery */}
+      <DeliveryBanner />
       
       {/* Sección de Menú con Fondo Moderno */}
-      <section className="relative py-16 bg-gradient-to-b from-gray-800 via-gray-900 to-gray-800 overflow-hidden">
+      <section id="menu" className="relative py-16 bg-gradient-to-b from-gray-800 via-gray-900 to-gray-800 overflow-hidden">
         
         {/* Elementos Decorativos de Fondo */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -137,14 +134,11 @@ export default function HomePage({ cartOpen, setCartOpen, cartItems, setCartItem
           </div>
         </div>
       </section>
-      <CartSidebar 
-        open={cartOpen} 
-        onClose={() => setCartOpen(false)} 
-        cartItems={cartItems} 
-        total={total} 
-        updateQuantity={updateQuantity}
-        removeItem={removeItem}
-      />
+      
+      {/* Sección Sobre Nosotros */}
+      <div id="about">
+        <AboutSection />
+      </div>
     </div>
   );
 }
