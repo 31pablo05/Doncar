@@ -109,9 +109,9 @@ export default function HeroBanner() {
                 className="w-full h-full object-cover object-center"
               />
             )}
-            {/* Overlay Gradiente - Más oscuro en móvil */}
-            <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-black/60 sm:from-black/80 sm:via-black/50 sm:to-black/20"></div>
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+            {/* Overlay Ligero - Solo para mejor legibilidad del texto */}
+            <div className="absolute inset-0 bg-gradient-to-r from-black/20 via-black/10 to-transparent sm:from-black/15 sm:via-black/5 sm:to-transparent"></div>
+            <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent"></div>
           </div>
         ))}
       </div>
