@@ -116,7 +116,7 @@ export default function ReviewsSection() {
         {[...Array(15)].map((_, i) => (
           <div
             key={i}
-            className="absolute w-1 h-1 bg-gradient-to-r from-amber-400 to-orange-500 rounded-full animate-float shadow-lg opacity-30"
+            className="absolute w-1 h-1 bg-gradient-to-r from-amber-400 to-orange-500 rounded-full animate-float-custom shadow-lg opacity-30"
             style={{
               left: `${10 + i * 6}%`,
               top: `${20 + (i % 4) * 20}%`,
@@ -334,28 +334,6 @@ export default function ReviewsSection() {
           </div>
         </div>
       </div>
-
-      {/* CSS personalizado para animaciones */}
-      <style jsx>{`
-        @keyframes float {
-          0%, 100% { transform: translateY(0px) rotate(0deg); }
-          50% { transform: translateY(-20px) rotate(180deg); }
-        }
-        
-        @keyframes gradient-x {
-          0%, 100% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
-        }
-        
-        .animate-float {
-          animation: float 6s ease-in-out infinite;
-        }
-        
-        .animate-gradient-x {
-          background-size: 200% 200%;
-          animation: gradient-x 3s ease infinite;
-        }
-      `}</style>
     </section>
   );
 }

@@ -50,7 +50,7 @@ export default function Footer() {
       {/* Elementos Decorativos de Fondo Mejorados */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {/* Orbes animados con gradientes dinámicos */}
-        <div className="absolute top-20 left-20 w-96 h-96 bg-gradient-to-r from-amber-500/15 via-orange-500/10 to-red-500/15 rounded-full blur-3xl animate-float opacity-60"></div>
+        <div className="absolute top-20 left-20 w-96 h-96 bg-gradient-to-r from-amber-500/15 via-orange-500/10 to-red-500/15 rounded-full blur-3xl animate-float-custom opacity-60"></div>
         <div className="absolute bottom-20 right-20 w-80 h-80 bg-gradient-to-r from-red-500/10 via-pink-500/15 to-purple-500/10 rounded-full blur-3xl animate-float-delayed opacity-50"></div>
         <div className="absolute top-1/2 left-1/3 w-64 h-64 bg-gradient-to-r from-blue-500/8 via-cyan-500/12 to-teal-500/8 rounded-full blur-2xl animate-pulse-slow"></div>
         
@@ -68,7 +68,7 @@ export default function Footer() {
         {[...Array(20)].map((_, i) => (
           <div
             key={i}
-            className="absolute w-1 h-1 bg-gradient-to-r from-amber-400 to-orange-500 rounded-full animate-float shadow-lg opacity-30"
+            className="absolute w-1 h-1 bg-gradient-to-r from-amber-400 to-orange-500 rounded-full animate-float-custom shadow-lg opacity-30"
             style={{
               left: `${5 + i * 4.5}%`,
               top: `${10 + (i % 5) * 20}%`,
@@ -264,7 +264,7 @@ export default function Footer() {
                 <div className="relative group/map">
                   <div className="overflow-hidden rounded-2xl border-2 border-amber-400/30 group-hover/map:border-amber-400/60 transition-all duration-500 shadow-lg hover:shadow-amber-400/20">
                     <iframe
-                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2965.2487!2d-65.3051!3d-43.2489!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDPCsDE0JzU2LjAiUyA2NcKwMTgnMTguNCJX!5e0!3m2!1ses!2sar!4v1000000000000!5m2!1ses!2sar&q=Pellegrini+1624,+Trelew,+Chubut"
+                      src="https://maps.google.com/maps?width=100%25&amp;height=200&amp;hl=es&amp;q=Pellegrini%201624,%20Trelew,%20Chubut&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
                       width="100%"
                       height="200"
                       style={{ border: 0 }}
@@ -348,45 +348,6 @@ export default function Footer() {
         </button>
       )}
 
-      {/* CSS personalizado para animaciones */}
-      <style jsx>{`
-        @keyframes float {
-          0%, 100% { transform: translateY(0px) rotate(0deg); }
-          50% { transform: translateY(-20px) rotate(180deg); }
-        }
-        
-        @keyframes float-delayed {
-          0%, 100% { transform: translateY(0px) rotate(0deg); }
-          50% { transform: translateY(-30px) rotate(-180deg); }
-        }
-        
-        @keyframes pulse-slow {
-          0%, 100% { opacity: 0.3; }
-          50% { opacity: 0.8; }
-        }
-        
-        @keyframes gradient-x {
-          0%, 100% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
-        }
-        
-        .animate-float {
-          animation: float 6s ease-in-out infinite;
-        }
-        
-        .animate-float-delayed {
-          animation: float-delayed 8s ease-in-out infinite;
-        }
-        
-        .animate-pulse-slow {
-          animation: pulse-slow 4s ease-in-out infinite;
-        }
-        
-        .animate-gradient-x {
-          background-size: 200% 200%;
-          animation: gradient-x 3s ease infinite;
-        }
-      `}</style>
     </footer>
   );
 }

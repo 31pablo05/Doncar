@@ -33,19 +33,21 @@
       "icons": [
         {
           "src": "/assets/images/logo.doncar.PNG",
-          "sizes": "96x96"
+          "sizes": "96x96",
+          "type": "image/png"
         }
       ]
     },
     {
-      "name": "Hacer Pedido",
-      "short_name": "Pedido",
-      "description": "Hacer pedido por WhatsApp",
-      "url": "https://wa.me/5492804518716",
+      "name": "Contacto",
+      "short_name": "Contacto",
+      "description": "Ver información de contacto",
+      "url": "/#contacto",
       "icons": [
         {
           "src": "/assets/images/logo.doncar.PNG",
-          "sizes": "96x96"
+          "sizes": "96x96",
+          "type": "image/png"
         }
       ]
     }

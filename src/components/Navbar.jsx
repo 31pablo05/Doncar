@@ -7,32 +7,18 @@ import { useState, useEffect } from "react";
 export default function Navbar({ cartItems = [], setCartOpen }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
     
-    // Detectar si es dispositivo móvil
-    const checkIfMobile = () => {
-      if (typeof window !== 'undefined') {
-        const isMobileDevice = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-        const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-        const isSmallScreen = window.innerWidth <= 768;
-        setIsMobile(isMobileDevice || (isTouchDevice && isSmallScreen));
-      }
-    };
-    
     // Solo agregar event listeners en el cliente
     if (typeof window !== 'undefined') {
       window.addEventListener('scroll', handleScroll);
-      window.addEventListener('resize', checkIfMobile);
-      checkIfMobile(); // Verificar al inicio
       
       return () => {
         window.removeEventListener('scroll', handleScroll);
-        window.removeEventListener('resize', checkIfMobile);
       };
     }
   }, []);
@@ -63,82 +49,153 @@ export default function Navbar({ cartItems = [], setCartOpen }) {
     }
   };
 
-  // Función de navegación específica para móvil con mejor compatibilidad
+  // Función de navegación DEFINITIVA para móvil 
   const navigateToSectionMobile = (sectionId) => {
-    if (typeof window !== 'undefined') {
-      console.log('Navegando a sección móvil:', sectionId, 'Es móvil:', isMobile); // Debug
-      
-      // Primero cerrar el menú
-      setMobileMenuOpen(false);
-      
-      // Función de scroll que funciona tanto en iOS como Android
-      const performScroll = () => {
-        try {
-          const element = document.querySelector(sectionId);
-          console.log('Elemento encontrado:', element ? 'Sí' : 'No', sectionId); // Debug
-          
-          if (element) {
-            if (isMobile) {
-              // Para dispositivos móviles, usar método más directo
-              const elementRect = element.getBoundingClientRect();
-              const absoluteElementTop = elementRect.top + window.pageYOffset;
-              const offsetPosition = Math.max(0, absoluteElementTop - 80); // Offset para el navbar fijo
-              
-              console.log('Scroll móvil a posición:', offsetPosition); // Debug
-              
-              // Método directo para móviles
-              window.scrollTo(0, offsetPosition);
-              
-              // Intentar smooth scroll como mejora si es compatible
-              setTimeout(() => {
-                window.scrollTo({
-                  top: offsetPosition,
-                  behavior: 'smooth'
-                });
-              }, 50);
-            } else {
-              // Para desktop o tablets, usar el método original
-              const elementRect = element.getBoundingClientRect();
-              const absoluteElementTop = elementRect.top + window.pageYOffset;
-              const offsetPosition = absoluteElementTop - 80;
-              
-              window.scrollTo({
-                top: offsetPosition,
-                behavior: 'smooth'
-              });
-            }
-            
-            console.log('Scroll iniciado hacia:', sectionId); // Debug
-          } else {
-            console.warn('Elemento no encontrado, scrolling al top'); // Debug
-            window.scrollTo({ top: 0, behavior: isMobile ? 'auto' : 'smooth' });
-          }
-        } catch (error) {
-          console.error('Error navegando a la sección móvil:', sectionId, error);
-          // Fallback más agresivo
-          setTimeout(() => {
-            try {
-              const element = document.querySelector(sectionId);
-              if (element) {
-                element.scrollIntoView({ behavior: 'auto', block: 'start' });
-              } else {
-                window.scrollTo(0, 0);
-              }
-            } catch (fallbackError) {
-              console.error('Fallback también falló:', fallbackError);
-              window.scrollTo(0, 0);
-            }
-          }, 100);
-        }
-      };
-      
-      // Usar requestAnimationFrame para mejor timing
-      requestAnimationFrame(() => {
-        // Tiempo de espera adaptativo según el dispositivo
-        const delay = isMobile ? 200 : 300;
-        setTimeout(performScroll, delay);
-      });
+    console.log('🔍 Navegación móvil iniciada:', sectionId);
+    
+    // Prevenir múltiples clicks
+    if (document.body.hasAttribute('data-scrolling')) {
+      console.log('⏳ Scroll ya en progreso, ignorando...');
+      return;
     }
+    
+    // Marcar que estamos haciendo scroll
+    document.body.setAttribute('data-scrolling', 'true');
+    
+    // Cerrar menú inmediatamente
+    setMobileMenuOpen(false);
+    
+    // Función de scroll ultra-robusta
+    const performScroll = () => {
+      console.log('📱 Ejecutando scroll a:', sectionId);
+      
+      const element = document.querySelector(sectionId);
+      if (element) {
+        console.log('✅ Elemento encontrado');
+        
+        // DEBUG: Verificar estilos que pueden interferir
+        const bodyStyle = window.getComputedStyle(document.body);
+        const htmlStyle = window.getComputedStyle(document.documentElement);
+        console.log('🔍 Body scroll-behavior:', bodyStyle.scrollBehavior);
+        console.log('🔍 HTML scroll-behavior:', htmlStyle.scrollBehavior);
+        console.log('🔍 Body overflow:', bodyStyle.overflow);
+        console.log('🔍 Body position:', bodyStyle.position);
+        
+        // SOLUCIÓN AGRESIVA: Forzar todos los estilos necesarios para scroll
+        console.log('🔧 Forzando estilos para permitir scroll...');
+        
+        // Guardar estilos originales
+        const originalBodyStyle = {
+          overflow: document.body.style.overflow,
+          overflowY: document.body.style.overflowY,
+          height: document.body.style.height,
+          position: document.body.style.position
+        };
+        
+        const originalHtmlStyle = {
+          overflow: document.documentElement.style.overflow,
+          overflowY: document.documentElement.style.overflowY,
+          height: document.documentElement.style.height
+        };
+        
+        // Forzar estilos que permitan scroll
+        document.body.style.overflow = 'visible';
+        document.body.style.overflowY = 'auto';
+        document.body.style.height = 'auto';
+        document.body.style.position = 'static';
+        
+        document.documentElement.style.overflow = 'visible';
+        document.documentElement.style.overflowY = 'auto';
+        document.documentElement.style.height = 'auto';
+        
+        // También remover clases que puedan interferir
+        document.body.classList.remove('overflow-hidden');
+        document.documentElement.classList.remove('overflow-hidden');
+        
+        // Forzar scroll-behavior a auto temporalmente
+        const originalBodyScrollBehavior = document.body.style.scrollBehavior;
+        const originalHtmlScrollBehavior = document.documentElement.style.scrollBehavior;
+        
+        document.body.style.scrollBehavior = 'auto';
+        document.documentElement.style.scrollBehavior = 'auto';
+        
+        // Calcular posición manualmente
+        const rect = element.getBoundingClientRect();
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+        const targetPosition = rect.top + scrollTop - 80;
+        
+        console.log('📍 Posición actual del scroll:', scrollTop);
+        console.log('📍 Posición del elemento (rect.top):', rect.top);
+        console.log('📍 Posición objetivo calculada:', targetPosition);
+        
+        // Scroll ULTRA-AGRESIVO con múltiples métodos simultáneos
+        console.log('🚀 Método AGRESIVO: Todos los métodos simultáneos');
+        
+        // Aplicar scroll con TODOS los métodos posibles
+        window.scrollTo(0, targetPosition);
+        window.scrollTo({top: targetPosition, behavior: 'auto'});
+        document.documentElement.scrollTop = targetPosition;
+        document.body.scrollTop = targetPosition;
+        
+        // También intentar con scrollBy desde la posición actual
+        const currentPos = window.pageYOffset || document.documentElement.scrollTop;
+        const scrollDistance = targetPosition - currentPos;
+        window.scrollBy(0, scrollDistance);
+        
+        console.log('📊 Aplicados todos los métodos de scroll simultáneamente');
+        
+        setTimeout(() => {
+          const pos1 = window.pageYOffset || document.documentElement.scrollTop;
+          console.log('📊 Posición después de método 1:', pos1);
+          
+          if (Math.abs(pos1 - targetPosition) > 50) {
+            console.log('🚀 Método 2: document.documentElement.scrollTop');
+            document.documentElement.scrollTop = targetPosition;
+            
+            setTimeout(() => {
+              const pos2 = window.pageYOffset || document.documentElement.scrollTop;
+              console.log('📊 Posición después de método 2:', pos2);
+              
+              if (Math.abs(pos2 - targetPosition) > 50) {
+                console.log('� Método 3: scrollIntoView');
+                element.scrollIntoView({ 
+                  behavior: 'auto', 
+                  block: 'start',
+                  inline: 'nearest'
+                });
+                
+                setTimeout(() => {
+                  const pos3 = window.pageYOffset || document.documentElement.scrollTop;
+                  console.log('📊 Posición final después de scrollIntoView:', pos3);
+                  
+                  // Restaurar estilos originales
+                  document.body.style.scrollBehavior = originalBodyScrollBehavior;
+                  document.documentElement.style.scrollBehavior = originalHtmlScrollBehavior;
+                  document.body.removeAttribute('data-scrolling');
+                }, 100);
+              } else {
+                console.log('✅ Scroll exitoso con método 2!');
+                document.body.style.scrollBehavior = originalBodyScrollBehavior;
+                document.documentElement.style.scrollBehavior = originalHtmlScrollBehavior;
+                document.body.removeAttribute('data-scrolling');
+              }
+            }, 50);
+          } else {
+            console.log('✅ Scroll exitoso con método 1!');
+            document.body.style.scrollBehavior = originalBodyScrollBehavior;
+            document.documentElement.style.scrollBehavior = originalHtmlScrollBehavior;
+            document.body.removeAttribute('data-scrolling');
+          }
+        }, 50);
+        
+      } else {
+        console.log('❌ Elemento no encontrado:', sectionId);
+        document.body.removeAttribute('data-scrolling');
+      }
+    };
+    
+    // Ejecutar después de que se cierre el menú
+    setTimeout(performScroll, 500); // Aumenté el tiempo para dar más margen
   };
 
   // Prevenir errores de hidratación en SSR
@@ -309,19 +366,11 @@ export default function Navbar({ cartItems = [], setCartOpen }) {
                   onClick={(e) => {
                     e.preventDefault();
                     e.stopPropagation();
-                    console.log('Click en menú móvil:', item.name, item.href); // Debug
-                    
-                    // Añadir feedback visual inmediato
-                    e.target.style.background = 'rgba(251, 191, 36, 0.2)';
-                    setTimeout(() => {
-                      if (e.target.style) {
-                        e.target.style.background = '';
-                      }
-                    }, 150);
-                    
+                    console.log('🔥 Click detectado en:', item.name, item.href);
                     navigateToSectionMobile(item.href);
                   }}
-                  className="w-full text-left py-3 px-4 rounded-xl transition-all duration-300 font-semibold transform hover:translate-x-2 text-white/80 hover:text-amber-300 hover:bg-white/5 border-l-4 border-transparent hover:border-amber-400/50 active:bg-amber-500/20 active:scale-95 focus:outline-none focus:ring-2 focus:ring-amber-400/50"
+                  disabled={document.body.hasAttribute('data-scrolling')}
+                  className="w-full text-left py-3 px-4 rounded-xl transition-all duration-300 font-semibold transform hover:translate-x-2 text-white/80 hover:text-amber-300 hover:bg-white/5 border-l-4 border-transparent hover:border-amber-400/50 active:bg-amber-500/20 active:scale-95 focus:outline-none focus:ring-2 focus:ring-amber-400/50 disabled:opacity-50 disabled:cursor-not-allowed"
                   style={{ animationDelay: `${index * 100}ms` }}
                 >
                   {item.name}

@@ -33,7 +33,7 @@ export default function AboutSection() {
       {/* Elementos Decorativos de Fondo Simplificados */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {/* Orbes animados con gradientes coherentes */}
-        <div className="absolute top-20 left-20 w-96 h-96 bg-gradient-to-r from-amber-500/20 via-orange-500/15 to-amber-600/20 rounded-full blur-3xl animate-float opacity-60"></div>
+        <div className="absolute top-20 left-20 w-96 h-96 bg-gradient-to-r from-amber-500/20 via-orange-500/15 to-amber-600/20 rounded-full blur-3xl animate-float-custom opacity-60"></div>
         <div className="absolute bottom-20 right-20 w-80 h-80 bg-gradient-to-r from-orange-500/15 via-amber-500/10 to-orange-600/15 rounded-full blur-3xl animate-float-delayed opacity-50"></div>
         <div className="absolute top-1/2 left-1/3 w-64 h-64 bg-gradient-to-r from-amber-400/10 via-orange-500/15 to-amber-500/10 rounded-full blur-2xl animate-pulse-slow"></div>
         
@@ -229,46 +229,6 @@ export default function AboutSection() {
         </div>
 
       </div>
-
-      {/* CSS personalizado para animaciones */}
-      <style jsx>{`
-        @keyframes float {
-          0%, 100% { transform: translateY(0px) rotate(0deg); }
-          50% { transform: translateY(-20px) rotate(180deg); }
-        }
-        
-        @keyframes float-delayed {
-          0%, 100% { transform: translateY(0px) rotate(0deg); }
-          50% { transform: translateY(-30px) rotate(-180deg); }
-        }
-        
-        @keyframes pulse-slow {
-          0%, 100% { opacity: 0.3; }
-          50% { opacity: 0.8; }
-        }
-        
-        @keyframes gradient-x {
-          0%, 100% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
-        }
-        
-        .animate-float {
-          animation: float 6s ease-in-out infinite;
-        }
-        
-        .animate-float-delayed {
-          animation: float-delayed 8s ease-in-out infinite;
-        }
-        
-        .animate-pulse-slow {
-          animation: pulse-slow 4s ease-in-out infinite;
-        }
-        
-        .animate-gradient-x {
-          background-size: 200% 200%;
-          animation: gradient-x 3s ease infinite;
-        }
-      `}</style>
     </section>
   );
 }
