@@ -1,9 +1,10 @@
 const categories = [
   "Todos",
-  "Comidas",
-  "Acompañamientos",
-  "Bebidas",
-  "Postres",
+  "Hamburguesas", 
+  "Pizzas",
+  "Chips",
+  "Sandwiches",
+  "Grille"
 ];
 
 export default categories;

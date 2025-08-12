@@ -14,7 +14,7 @@ export default function CartSidebar({ isOpen, onClose, items, onUpdateQuantity, 
           <h3 className="text-xl font-bold text-white flex items-center">
             🛒 TU PEDIDO
             {items.length > 0 && (
-              <span className="ml-2 bg-red-500 text-white px-2 py-1 rounded-full text-xs font-bold">
+              <span className="ml-2 text-white px-2 py-1 rounded-full text-xs font-bold" style={{background: 'linear-gradient(90deg, #fec15d 0%, #f59e0b 100%)'}}>
                 {items.reduce((sum, item) => sum + item.quantity, 0)}
               </span>
             )}
@@ -42,7 +42,7 @@ export default function CartSidebar({ isOpen, onClose, items, onUpdateQuantity, 
                     </div>
                     <button 
                       onClick={() => onRemoveItem(item.id)}
-                      className="text-red-400 hover:text-red-300 p-1 hover:bg-red-500/20 rounded-lg transition-all duration-200"
+                      className="text-amber-400 hover:text-amber-300 p-1 hover:bg-amber-500/20 rounded-lg transition-all duration-200"
                     >
                       <Trash2 className="h-4 w-4" />
                     </button>
@@ -52,7 +52,7 @@ export default function CartSidebar({ isOpen, onClose, items, onUpdateQuantity, 
                     <div className="flex items-center space-x-3">
                       <button 
                         onClick={() => onUpdateQuantity(item.id, item.quantity - 1)}
-                        className="bg-red-500/20 hover:bg-red-500/30 border border-red-500/50 hover:border-red-400 text-red-300 hover:text-red-200 w-8 h-8 rounded-lg flex items-center justify-center transition-all duration-200 hover:scale-110"
+                        className="bg-amber-500/20 hover:bg-amber-500/30 border border-amber-500/50 hover:border-amber-400 text-amber-300 hover:text-amber-200 w-8 h-8 rounded-lg flex items-center justify-center transition-all duration-200 hover:scale-110"
                       >
                         <Minus className="h-4 w-4" />
                       </button>
@@ -63,14 +63,14 @@ export default function CartSidebar({ isOpen, onClose, items, onUpdateQuantity, 
                       
                       <button 
                         onClick={() => onUpdateQuantity(item.id, item.quantity + 1)}
-                        className="bg-green-500/20 hover:bg-green-500/30 border border-green-500/50 hover:border-green-400 text-green-300 hover:text-green-200 w-8 h-8 rounded-lg flex items-center justify-center transition-all duration-200 hover:scale-110"
+                        className="bg-amber-500/20 hover:bg-amber-500/30 border border-amber-500/50 hover:border-amber-400 text-amber-300 hover:text-amber-200 w-8 h-8 rounded-lg flex items-center justify-center transition-all duration-200 hover:scale-110"
                       >
                         <Plus className="h-4 w-4" />
                       </button>
                     </div>
                     
                     <div className="text-right">
-                      <p className="text-red-400 font-bold">
+                      <p className="text-amber-400 font-bold">
                         ${(item.price * item.quantity).toFixed(2)}
                       </p>
                     </div>
@@ -92,7 +92,7 @@ export default function CartSidebar({ isOpen, onClose, items, onUpdateQuantity, 
               </div>
               <div className="flex justify-between items-center mt-2">
                 <span className="text-xl font-bold text-white">TOTAL:</span>
-                <span className="text-2xl font-black text-red-400">${total.toFixed(2)}</span>
+                <span className="text-2xl font-black text-amber-400">${total.toFixed(2)}</span>
               </div>
             </div>
             
@@ -108,7 +108,7 @@ export default function CartSidebar({ isOpen, onClose, items, onUpdateQuantity, 
               
               <button 
                 onClick={() => items.forEach(item => onRemoveItem(item.id))}
-                className="w-full bg-red-500/20 hover:bg-red-500/30 border border-red-500/50 hover:border-red-400 text-red-300 hover:text-red-200 py-3 rounded-xl font-semibold transition-all duration-300 hover:scale-105"
+                className="w-full bg-amber-500/20 hover:bg-amber-500/30 border border-amber-500/50 hover:border-amber-400 text-amber-300 hover:text-amber-200 py-3 rounded-xl font-semibold transition-all duration-300 hover:scale-105"
               >
                 🗑️ Vaciar Carrito
               </button>

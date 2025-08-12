@@ -109,9 +109,9 @@ export default function HeroBanner() {
                 className="w-full h-full object-cover object-center"
               />
             )}
-            {/* Overlay Ligero - Solo para mejor legibilidad del texto */}
-            <div className="absolute inset-0 bg-gradient-to-r from-black/20 via-black/10 to-transparent sm:from-black/15 sm:via-black/5 sm:to-transparent"></div>
-            <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent"></div>
+            {/* Overlay Mejorado para mejor legibilidad */}
+            <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-black/30"></div>
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-black/30"></div>
           </div>
         ))}
       </div>
@@ -145,35 +145,35 @@ export default function HeroBanner() {
           {/* Contenido Principal Centrado */}
           <div className="space-y-6 sm:space-y-8 text-center lg:text-left max-w-4xl mx-auto lg:mx-0">
             {/* Badge Superior */}
-            <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-gray-400/20 to-gray-600/20 backdrop-blur-sm border border-gray-400/30 rounded-full px-3 py-1.5 sm:px-4 sm:py-2">
-              <Star className="h-3 w-3 sm:h-4 sm:w-4 text-gray-400 fill-current" />
-              <span className="text-gray-300 font-semibold text-xs sm:text-sm">Calidad Premium</span>
+            <div className="inline-flex items-center space-x-2 bg-black/50 backdrop-blur-sm border border-amber-500/40 rounded-full px-3 py-1.5 sm:px-4 sm:py-2 shadow-2xl">
+              <Star className="h-3 w-3 sm:h-4 sm:w-4 text-amber-400 fill-current" />
+              <span className="text-white font-semibold text-xs sm:text-sm drop-shadow-lg">Calidad Premium</span>
             </div>
 
             {/* Título Principal */}
             <div className="space-y-2 sm:space-y-4">
               <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black leading-tight">
-                <span className="text-white block animate-fadeInUp">
+                <span className="text-white drop-shadow-2xl block animate-fadeInUp" style={{ textShadow: '0 0 20px rgba(0,0,0,0.8), 0 0 40px rgba(0,0,0,0.6)' }}>
                   {slides[currentSlide].title.split(' ')[0]}
                 </span>
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-gray-400 via-gray-600 to-gray-800 block animate-fadeInUp delay-200">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-yellow-400 to-orange-400 drop-shadow-2xl block animate-fadeInUp delay-200" style={{ filter: 'drop-shadow(0 0 10px rgba(0,0,0,0.8))' }}>
                   {slides[currentSlide].title.split(' ').slice(1).join(' ')}
                 </span>
               </h1>
               
-              <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-gray-300 font-bold animate-fadeInUp delay-300">
+              <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-transparent bg-clip-text bg-gradient-to-r from-gray-200 via-gray-400 to-gray-600 font-bold animate-fadeInUp delay-300 drop-shadow-2xl" style={{ filter: 'drop-shadow(0 0 15px rgba(0,0,0,0.8))' }}>
                 {slides[currentSlide].subtitle}
               </h2>
             </div>
 
             {/* Descripción */}
-            <p className="text-base sm:text-lg md:text-xl text-white/90 leading-relaxed max-w-lg sm:max-w-2xl mx-auto lg:mx-0 animate-fadeInUp delay-400 px-4 sm:px-0">
+            <p className="text-base sm:text-lg md:text-xl text-white leading-relaxed max-w-lg sm:max-w-2xl mx-auto lg:mx-0 animate-fadeInUp delay-400 px-4 sm:px-0 drop-shadow-2xl font-medium" style={{ textShadow: '0 0 15px rgba(0,0,0,0.8)' }}>
               {slides[currentSlide].description}
             </p>
 
             {/* Botones de Acción */}
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start animate-fadeInUp delay-500 px-4 sm:px-0">
-              <button className="group bg-gradient-to-r from-gray-400 to-gray-600 hover:from-gray-500 hover:to-gray-700 text-white px-6 py-3 sm:px-8 sm:py-4 rounded-2xl font-bold text-base sm:text-lg shadow-2xl hover:shadow-gray-500/25 transition-all transform hover:scale-105 hover:-translate-y-1 duration-300 flex items-center justify-center space-x-2">
+              <button className="group text-white px-6 py-3 sm:px-8 sm:py-4 rounded-2xl font-bold text-base sm:text-lg shadow-2xl hover:shadow-amber-500/25 transition-all transform hover:scale-105 hover:-translate-y-1 duration-300 flex items-center justify-center space-x-2" style={{background: 'linear-gradient(90deg, #fec15d 0%, #f59e0b 100%)'}}>
                 <span>{slides[currentSlide].cta}</span>
                 <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5 group-hover:translate-x-1 transition-transform duration-300" />
               </button>
@@ -182,15 +182,15 @@ export default function HeroBanner() {
             {/* Indicadores de Estadísticas */}
             <div className="grid grid-cols-3 gap-4 sm:gap-6 pt-6 sm:pt-8 max-w-xs sm:max-w-md mx-auto lg:mx-0 animate-fadeInUp delay-600">
               {[
-                { number: "500+", label: "Clientes Felices" },
-                { number: "50+", label: "Platos Únicos" },
-                { number: "4.9", label: "Rating Promedio" }
+                { number: "500+", label: "Clientes Felices", gradient: "from-amber-300 via-yellow-400 to-orange-400" },
+                { number: "50+", label: "Platos Únicos", gradient: "from-gray-300 via-gray-500 to-gray-700" },
+                { number: "4.9", label: "Rating Promedio", gradient: "from-amber-400 via-yellow-500 to-orange-500" }
               ].map((stat, index) => (
                 <div key={index} className="text-center lg:text-left">
-                  <div className="text-xl sm:text-2xl md:text-3xl font-black text-gray-400">
+                  <div className={`text-xl sm:text-2xl md:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r ${stat.gradient} drop-shadow-2xl`} style={{ filter: 'drop-shadow(0 0 15px rgba(0,0,0,0.8))' }}>
                     {stat.number}
                   </div>
-                  <div className="text-xs sm:text-sm text-white/70 font-medium">
+                  <div className="text-xs sm:text-sm text-white font-semibold drop-shadow-lg" style={{ textShadow: '0 0 10px rgba(0,0,0,0.8)' }}>
                     {stat.label}
                   </div>
                 </div>
@@ -200,16 +200,16 @@ export default function HeroBanner() {
         </div>
       </div>
 
-      {/* Controles del Carrusel */}
+          {/* Controles del Carrusel */}
       <div className="absolute bottom-4 sm:bottom-8 left-1/2 transform -translate-x-1/2 z-30">
-        <div className="flex items-center space-x-3 sm:space-x-6 bg-black/40 backdrop-blur-xl rounded-full px-4 py-3 sm:px-6 sm:py-4 border border-white/10">
+        <div className="flex items-center space-x-3 sm:space-x-6 bg-black/60 backdrop-blur-xl rounded-full px-4 py-3 sm:px-6 sm:py-4 border border-amber-500/30 shadow-2xl">
           
           {/* Botón Anterior */}
           <button
             onClick={prevSlide}
-            className="p-1.5 sm:p-2 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 hover:border-gray-400/30 transition-all duration-300 hover:scale-110"
+            className="p-1.5 sm:p-2 rounded-full bg-white/20 hover:bg-amber-500/30 border border-white/30 hover:border-amber-500/50 transition-all duration-300 hover:scale-110"
           >
-            <ChevronLeft className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
+            <ChevronLeft className="h-4 w-4 sm:h-5 sm:w-5 text-white drop-shadow-lg" />
           </button>
 
           {/* Indicadores de Slide */}
@@ -220,8 +220,8 @@ export default function HeroBanner() {
                 onClick={() => goToSlide(index)}
                 className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-all duration-300 ${
                   index === currentSlide
-                    ? 'bg-gradient-to-r from-gray-400 to-gray-600 scale-125'
-                    : 'bg-white/30 hover:bg-white/50'
+                    ? 'bg-gradient-to-r from-amber-400 to-orange-500 scale-125 shadow-lg'
+                    : 'bg-white/40 hover:bg-white/60'
                 }`}
               />
             ))}
@@ -230,17 +230,17 @@ export default function HeroBanner() {
           {/* Botón Siguiente */}
           <button
             onClick={nextSlide}
-            className="p-1.5 sm:p-2 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 hover:border-gray-400/30 transition-all duration-300 hover:scale-110"
+            className="p-1.5 sm:p-2 rounded-full bg-white/20 hover:bg-amber-500/30 border border-white/30 hover:border-amber-500/50 transition-all duration-300 hover:scale-110"
           >
-            <ChevronRight className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
+            <ChevronRight className="h-4 w-4 sm:h-5 sm:w-5 text-white drop-shadow-lg" />
           </button>
         </div>
       </div>
 
       {/* Indicador de Progreso */}
-      <div className="absolute bottom-0 left-0 w-full h-0.5 sm:h-1 bg-black/20">
+      <div className="absolute bottom-0 left-0 w-full h-0.5 sm:h-1 bg-black/40">
         <div 
-          className="h-full bg-gradient-to-r from-gray-400 to-gray-600 transition-all duration-300 ease-linear"
+          className="h-full bg-gradient-to-r from-amber-400 to-orange-500 transition-all duration-300 ease-linear shadow-lg"
           style={{ 
             width: `${((currentSlide + 1) / slides.length) * 100}%`
           }}
